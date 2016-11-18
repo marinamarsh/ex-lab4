@@ -15,3 +15,28 @@ class Unique(object):
 
     def __iter__(self):
         return self
+      if 'ignore_case' in kwargs.keys():
+            self.IGNORE_CASE = kwargs['ignore_case']
+        if isinstance(items, types.GeneratorType):
+            self.ITEMS = list(items)
+        else:
+            self.ITEMS = items
+
+    def __next__(self):
+        # Нужно реализовать __next__
+        while True:
+            if self.INDEX == len(self.ITEMS) - 1:
+                raise StopIteration
+            self.INDEX += 1
+            val = self.ITEMS[self.INDEX]
+            val2 = val
+            if self.IGNORE_CASE:
+                val2 = val2.lower()
+            if val2 not in self.PASSED:
+                self.PASSED.append(val2)
+                return val
+
+    def __iter__(self):
+        del self.PASSED[:]
+        self.INDEX = -1
+        return self
