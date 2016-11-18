@@ -9,3 +9,6 @@ goods = [
 ]
 
 # Реализация задания 1
+print(list(field(goods, 'title')))
+print(list(field(goods, 'title', 'price')))
+print(list(gen_random(1, 3, 5)))
